@@ -17,3 +17,7 @@ package "python-pip" do
 	action	:install
 end
 
+execute "pip install -r requirements.txt" do
+    cwd "/vagrant/banana"
+end
+

@@ -4,4 +4,4 @@ CACHE
 *.swp
 .DS_Store
 .vagrant
-
+.idea
