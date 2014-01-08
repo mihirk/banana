@@ -1,0 +1,7 @@
+Vagrantfile
+CACHE
+*.pyc
+*.swp
+.DS_Store
+.vagrant
+
