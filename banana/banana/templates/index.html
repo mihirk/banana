@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>
+            Banana
+        </title>
+    </head>
+    <body>
+        <h1>
+            Banana
+        </h1>
+            {% for blog_post in blog_posts %}
+                <h2>{{ blog_post.title }}</h2>
+                 <h3> - {{ blog_post.author }}  published on - {{ blog_post.timestamp }} </h3>
+                <p>{{ blog_post.content }}</p>
+            {% endfor %}
+    </body>
+</html>

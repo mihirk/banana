@@ -10,6 +10,10 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -24,7 +28,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -36,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.templatetags',
+    'banana',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,17 +57,18 @@ ROOT_URLCONF = 'banana.urls'
 
 WSGI_APPLICATION = 'banana.wsgi.application'
 
-
+TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+#
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+LOCAL_DATABASE_PATH = 'sqlite:/' + os.path.join(BASE_DIR + "/db.sqlite3")
+DATABASES['default'] = dj_database_url.config(default=LOCAL_DATABASE_PATH)
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -80,3 +87,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = PROJECT_ROOT + STATIC_URL
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
